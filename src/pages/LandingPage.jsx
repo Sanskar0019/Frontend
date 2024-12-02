@@ -1,152 +1,133 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-
-// Sample data for faculties and reviews
-const faculties = [
-  {
-    name: 'Dr. John Doe',
-    title: 'Professor of Computer Science',
-    image: 'https://randomuser.me/api/portraits/men/1.jpg',
-  },
-  {
-    name: 'Dr. Jane Smith',
-    title: 'Professor of Mathematics',
-    image: 'https://randomuser.me/api/portraits/women/1.jpg',
-  },
-  {
-    name: 'Dr. Emily Clark',
-    title: 'Professor of Physics',
-    image: 'https://randomuser.me/api/portraits/women/2.jpg',
-  },
-  {
-    name: 'Dr. Michael Brown',
-    title: 'Professor of Chemistry',
-    image: 'https://randomuser.me/api/portraits/men/2.jpg',
-  },
-];
-
-const reviews = [
-  {
-    name: 'Alice Johnson',
-    review:
-      'Wisdom Nest has been a game-changer for my career. The courses are well-structured and taught by experts.',
-  },
-  {
-    name: 'Mark Robinson',
-    review:
-      'Fantastic platform for learning. I’ve gained so much knowledge and practical skills that I can apply directly to my job.',
-  },
-  {
-    name: 'Sarah Lee',
-    review:
-      'The learning experience here is second to none. The instructors are knowledgeable, and the content is top-notch.',
-  },
-];
+import React from "react";
+import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const LandingPage = () => {
   return (
-    <div className="bg-gray-900 text-white">
+    <div className="bg-gray-900 text-white min-h-screen">
       {/* Hero Section */}
-      <div className="flex flex-col justify-center items-center text-center py-20 bg-black bg-opacity-70">
-        <h1 className="text-5xl font-bold text-indigo-500 mb-4">Welcome to Wisdom Nest</h1>
-        <p className="text-lg mb-8 max-w-xl mx-auto">
-          Your gateway to knowledge, skill-building, and a brighter future. Explore our courses and join a community
-          of learners.
+      <section className="bg-black py-20 px-6 text-center">
+        <h1 className="text-5xl font-bold text-indigo-500 mb-6">Welcome to Wisdom Nest</h1>
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          Empowering lifelong learners with world-class courses taught by the best experts. 
+          Start your learning journey today!
         </p>
-        <Link to="/courses">
-          <button className="bg-indigo-600 hover:bg-indigo-500 text-white py-3 px-8 rounded-lg font-semibold transition duration-300 shadow-lg hover:shadow-indigo-500/50">
-            Browse Courses
-          </button>
-        </Link>
-      </div>
-
-      {/* Faculty Slider Section */}
-      <div className="py-16 px-8 bg-gray-800">
-        <h2 className="text-3xl font-bold text-center text-indigo-500 mb-8">Meet Our Expert Faculty</h2>
-        <Swiper
-          spaceBetween={30}
-          slidesPerView={1}
-          loop={true}          // Infinite loop
-          autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay and continue after interaction
-          breakpoints={{
-            640: {
-              slidesPerView: 2,
-            },
-            768: {
-              slidesPerView: 3,
-            },
-            1024: {
-              slidesPerView: 4,
-            },
-          }}
+        <a
+          href="/courses"
+          className="bg-indigo-600 hover:bg-indigo-500 px-8 py-3 rounded text-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/50"
         >
-          {faculties.map((faculty, index) => (
-            <SwiperSlide key={index}>
-              <div className="bg-gray-700 rounded-lg p-6 text-center">
-                <img
-                  src={faculty.image}
-                  alt={faculty.name}
-                  className="rounded-full w-32 h-32 mx-auto mb-4"
-                />
-                <h3 className="text-xl font-semibold">{faculty.name}</h3>
-                <p className="text-gray-300">{faculty.title}</p>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+          Browse Courses
+        </a>
+      </section>
 
-      {/* Social Links Section */}
-      <div className="py-16 bg-black">
-        <h2 className="text-3xl font-bold text-center text-indigo-500 mb-8">Follow Us</h2>
-        <div className="flex justify-center gap-6">
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white text-3xl hover:text-indigo-500">
-            <FaTwitter />
-          </a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white text-3xl hover:text-indigo-500">
-            <FaFacebook />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white text-3xl hover:text-indigo-500">
-            <FaInstagram />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white text-3xl hover:text-indigo-500">
-            <FaLinkedin />
-          </a>
-        </div>
+      {/* About Us Section */}
+      <section id="about" className="py-16 px-6">
+        <h2 className="text-4xl font-bold text-center text-indigo-500 mb-10">About Us</h2>
+        <p className="text-lg text-gray-300 max-w-4xl mx-auto text-center">
+          At Wisdom Nest, we believe education is the cornerstone of progress. 
+          Our mission is to provide high-quality, accessible learning resources to everyone.
+        </p>
+      </section>
+
+      {/* Faculties Section */}
+      <section id="faculties" className="py-16 px-6 bg-gray-800">
+  <h2 className="text-4xl font-bold text-center text-indigo-500 mb-10">Meet Our Experts</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    {[
+      {
+        name: "Dr. John Doe",
+        speciality: "AI and Machine Learning",
+        img: "/Teacher 1.jpg",
+      },
+      {
+        name: "Prof. Jane Smith",
+        speciality: "UI/UX Design",
+        img: "/Teacher 2.jpg",
+      },
+      {
+        name: "Dr. Alan Brown",
+        speciality: "Digital Marketing",
+        img: "/Teacher 3.jpg",
+      },
+      {
+        name: "Prof. Emily White",
+        speciality: "Leadership and Strategy",
+        img: "/Teacher 4.jpg",
+      },
+    ].map((faculty, index) => (
+      <div
+        key={index}
+        className="bg-black bg-opacity-60 p-6 rounded-lg text-center hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/50"
+      >
+        <img
+          src={faculty.img}
+          alt={faculty.name}
+          className="w-24 h-24 mx-auto mb-4 rounded-full object-cover"
+        />
+        <h3 className="text-xl font-semibold text-indigo-400">{faculty.name}</h3>
+        <p className="text-gray-300">{faculty.speciality}</p>
       </div>
+    ))}
+  </div>
+</section>
 
       {/* Reviews Section */}
-      <div className="py-16 px-8 bg-gray-800">
-        <h2 className="text-3xl font-bold text-center text-indigo-500 mb-8">What Our Students Say</h2>
-        <Swiper
-          spaceBetween={30}
-          slidesPerView={1}
-          loop={true}          // Infinite loop
-          autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay and continue after interaction
-        >
-          {reviews.map((review, index) => (
-            <SwiperSlide key={index}>
-              <div className="bg-gray-700 p-6 rounded-lg text-center">
-                <p className="text-lg text-gray-300 mb-4">"{review.review}"</p>
-                <p className="text-indigo-500 font-semibold">{review.name}</p>
-              </div>
-            </SwiperSlide>
+      <section id="reviews" className="py-16 px-6">
+        <h2 className="text-4xl font-bold text-center text-indigo-500 mb-10">What Our Students Say</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            "Life-changing courses with practical insights.",
+            "The faculty is truly world-class.",
+            "The learning platform is seamless and user-friendly.",
+          ].map((review, index) => (
+            <div
+              key={index}
+              className="bg-gray-800 p-6 rounded-lg text-center hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/50"
+            >
+              <p className="text-gray-300 italic">"{review}"</p>
+              <h4 className="text-indigo-400 mt-4">- Student {index + 1}</h4>
+            </div>
           ))}
-        </Swiper>
-      </div>
+        </div>
+      </section>
 
-      {/* Additional Section: Our Vision */}
-      <div className="py-16 px-8 bg-black">
-        <h2 className="text-3xl font-bold text-center text-indigo-500 mb-8">Our Vision</h2>
-        <p className="text-lg text-gray-300 text-center max-w-2xl mx-auto">
-          At Wisdom Nest, we strive to provide accessible, high-quality education to learners all over the world. Our
-          vision is to empower individuals to reach their full potential through skill-building, expert guidance, and a
-          thriving community of learners.
-        </p>
-      </div>
+      {/* Social Links Section */}
+      <section id="social" className="py-16 px-6 bg-gray-800">
+        <h2 className="text-4xl font-bold text-center text-indigo-500 mb-10">Follow Us</h2>
+        <div className="flex justify-center gap-8">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-500 hover:text-indigo-400 text-4xl transition-all duration-300"
+          >
+            <FaFacebook />
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-500 hover:text-indigo-400 text-4xl transition-all duration-300"
+          >
+            <FaTwitter />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-500 hover:text-indigo-400 text-4xl transition-all duration-300"
+          >
+            <FaLinkedin />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-500 hover:text-indigo-400 text-4xl transition-all duration-300"
+          >
+            <FaInstagram />
+          </a>
+        </div>
+      </section>
     </div>
   );
 };

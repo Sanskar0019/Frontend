@@ -6,6 +6,7 @@ import AuthPage from "./pages/AuthPage";
 import CoursesPreview from "./pages/CoursesPreview";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/contact" element={<ContactUs/>} />
             </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );
