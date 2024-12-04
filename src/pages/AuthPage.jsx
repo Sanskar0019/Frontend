@@ -1,52 +1,55 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";  // Use useNavigate instead of useHistory
+import { Link, useNavigate } from "react-router-dom";
 
-const AuthPage = ({ isSignin }) => {
+const AuthPage = ({ isSignin = true }) => {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const navigate = useNavigate();  // Hook for navigation
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");  // Reset error
-    setSuccess("");  // Reset success message
-  
+    setError("");
+    setSuccess("");
+
+    const { name, email, password } = formData;
+
+    // Basic form validation
+    if (!email || !password || (!isSignin && !name)) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
     try {
-      // Set the API endpoint based on whether it's sign-in or sign-up
-      const endpoint = isSignin ? "/api/auth/signin" : "/api/auth/signup";
-      
-      // Prepare the payload (sign-in vs sign-up)
-      const payload = isSignin
-        ? { email: formData.email, password: formData.password }
-        : formData;
-  
-      // Send the request to your local server (localhost:5000)
-      const response = await axios.post(`http://localhost:5000${endpoint}`, payload);
-      
-      setSuccess(response.data.message || "Success!");  // Set success message
-      
+      const endpoint = isSignin ? "/api/signin" : "/api/signup";
+      const response = await axios.post(
+        `http://localhost:5000${endpoint}`,
+        isSignin ? { email, password } : { name, email, password }
+      );
+
+      setSuccess(response.data.message || "Success!");
+
       if (isSignin) {
-        // Save JWT token in localStorage upon successful sign-in
         localStorage.setItem("token", response.data.token);
-        
-        // Redirect to the dashboard after successful login
-        navigate("/dashboard");  // Use navigate instead of history.push
+        navigate("/dashboard");
+      } else {
+        setTimeout(() => {
+          navigate("/signin");
+        }, 1500); // Redirect to Sign In after successful sign-up
       }
     } catch (err) {
-      // Display error message from the response, or fallback to a generic error
-      setError(err.response?.data?.error || "An error occurred.");
+      setError(err.response?.data?.message || "An error occurred.");
     }
   };
-  
 
   return (
     <div className="bg-gradient-to-b from-gray-900 via-black to-gray-900 min-h-screen flex items-center justify-center text-white">
@@ -59,6 +62,20 @@ const AuthPage = ({ isSignin }) => {
         {success && <p className="text-green-500 text-center mb-4">{success}</p>}
 
         <form className="space-y-6" onSubmit={handleSubmit}>
+          {!isSignin && (
+            <div>
+              <label className="block text-sm mb-2">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter your name"
+                className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                required
+              />
+            </div>
+          )}
           <div>
             <label className="block text-sm mb-2">Email</label>
             <input
@@ -68,6 +85,7 @@ const AuthPage = ({ isSignin }) => {
               onChange={handleChange}
               placeholder="Enter your email"
               className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              required
             />
           </div>
           <div>
@@ -79,6 +97,7 @@ const AuthPage = ({ isSignin }) => {
               onChange={handleChange}
               placeholder="Enter your password"
               className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              required
             />
           </div>
           <button
@@ -93,16 +112,16 @@ const AuthPage = ({ isSignin }) => {
           {isSignin ? (
             <p className="text-sm text-gray-400">
               Don't have an account?{" "}
-              <a href="/signup" className="text-indigo-400 hover:underline">
+              <Link to="/signup" className="text-indigo-400 hover:underline">
                 Sign Up
-              </a>
+              </Link>
             </p>
           ) : (
             <p className="text-sm text-gray-400">
               Already have an account?{" "}
-              <a href="/signin" className="text-indigo-400 hover:underline">
+              <Link to="/signin" className="text-indigo-400 hover:underline">
                 Sign In
-              </a>
+              </Link>
             </p>
           )}
         </div>
