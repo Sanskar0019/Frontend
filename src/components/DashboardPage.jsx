@@ -6,7 +6,6 @@ const Dashboard = () => {
 
   // Function to decode the JWT token
   const decodeJWT = (token) => {
-    // Split the token into three parts: Header, Payload, Signature
     const base64Url = token.split('.')[1]; // Get the payload part
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Decode Base64 URL format
     const decodedData = atob(base64); // Decode Base64
@@ -30,15 +29,15 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="bg-gray-900 text-white p-10 min-h-screen flex flex-col justify-center items-center">
-      <h1 className="text-3xl mb-6">Welcome to your Dashboard!</h1>
+    <div className="bg-gray-900 text-white p-6 md:p-10 min-h-screen flex flex-col justify-center items-center">
+      <h1 className="text-3xl md:text-4xl mb-6">Welcome to your Dashboard!</h1>
       {loading ? (
-        <p className="text-xl">Loading...</p>  // Show loading message while fetching user data
+        <p className="text-xl md:text-2xl">Loading...</p>  // Show loading message while fetching user data
       ) : (
         userName ? (
-          <p className="text-xl">Hello, {userName}!</p>  // Display the user's name from the token
+          <p className="text-xl md:text-2xl">Hello, {userName}!</p>  // Display the user's name from the token
         ) : (
-          <p className="text-xl">User data not available</p>  // If no user data in token
+          <p className="text-xl md:text-2xl">User data not available</p>  // If no user data in token
         )
       )}
     </div>

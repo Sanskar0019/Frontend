@@ -9,6 +9,7 @@ import ContactUs from "./pages/ContactUs";
 import Footer from "./components/Footer";
 import DashboardPage from "./components/DashboardPage";
 import CourseDetails from "./pages/CourseDetails"; // Import the new CourseDetails page
+import PurchasePage from "./pages/PurchasePage"; // Import the new PurchasePage page
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/purchase" element={<PurchasePage />} />
           </Routes>
         </main>
         <Footer />
