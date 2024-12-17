@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const LandingPage = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen">
+    <div className="bg-gray-900 text-white min-h-screen font-sora">
       {/* Hero Section */}
       <section className="bg-black py-16 px-6 text-center">
         <h1 className="text-4xl sm:text-5xl font-bold text-indigo-500 mb-6">Welcome to Wisdom Nest</h1>
@@ -21,7 +21,7 @@ const LandingPage = () => {
 
       {/* About Us Section */}
       <section id="about" className="py-16 px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center text-indigo-500 mb-10">About Us</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-indigo-500 mb-10">What is Our</h2>
         <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto text-center">
           At Wisdom Nest, we believe education is the cornerstone of progress. 
           Our mission is to provide high-quality, accessible learning resources to everyone.

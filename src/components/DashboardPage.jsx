@@ -4,6 +4,26 @@ const Dashboard = () => {
   const [userName, setUserName] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    
+    if (token) {
+      try {
+        const decodedToken = decodeJWT(token);
+        const userName = decodedToken.name;
+        setUserName(userName);
+  
+        // Notify App that login has occurred
+        window.dispatchEvent(new Event("loginEvent"));
+      } catch (error) {
+        console.error("Token decoding failed:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }, []);
+  
+
   // Function to decode the JWT token
   const decodeJWT = (token) => {
     const base64Url = token.split('.')[1]; // Get the payload part
